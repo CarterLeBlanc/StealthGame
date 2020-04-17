@@ -10,6 +10,7 @@
 ********************************************************************************************/
 
 #include "raylib.h"
+#include "Map.h"
 #include "Pathfinding.h"
 #include "Agent.h"
 #include "KeyboardBehavior.h"
@@ -39,6 +40,22 @@ int main()
 	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
 	SetTargetFPS(60);
+
+	//Map<tileType> map({ 1600, 800 }, { 16, 16 }, closed, MAROON);
+
+	////Walls
+	//map.createTile({ 0, 0 }, open, SKYBLUE);
+	//map.createTile({ 2, 0 }, open, SKYBLUE);
+	//map.createTile({ 2, 1 }, open, SKYBLUE);
+	//map.createTile({ 2, 2 }, open, SKYBLUE);
+	//map.createTile({ 1, 3 }, open, SKYBLUE);
+	//map.createTile({ 0, 2 }, open, SKYBLUE);
+
+	//Tile<tileType> tile1 = map.checkTile({ 100, 100 });
+	//Tile<tileType> tile2 = map.getTile({ 1, 3 });
+
+	//std::cout << tile1.data << ", ";
+	//std::cout << tile2.data << std::endl;
 
 	//Set up the player
 	Agent* player = new Agent();
@@ -118,6 +135,9 @@ int main()
 		BeginDrawing();
 
 		ClearBackground(BLACK);
+
+		//Draw tile map
+		//map.draw();
 
 		player->draw();
 		enemy1->draw();

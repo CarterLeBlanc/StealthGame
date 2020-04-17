@@ -150,6 +150,7 @@
     <ClInclude Include="Decision.h" />
     <ClInclude Include="DecisionTreeBehavior.h" />
     <ClInclude Include="KeyboardBehavior.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Pathfinding.h" />
     <ClInclude Include="PatrolBehavior.h" />
     <ClInclude Include="PursuitBehavior.h" />
