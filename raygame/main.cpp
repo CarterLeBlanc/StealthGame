@@ -10,8 +10,6 @@
 ********************************************************************************************/
 
 #include "raylib.h"
-#include "Map.h"
-#include "Pathfinding.h"
 #include "Agent.h"
 #include "KeyboardBehavior.h"
 #include "PursuitBehavior.h"
@@ -20,15 +18,8 @@
 #include "BehaviorDecision.h"
 #include "DecisionTreeBehavior.h"
 #include "PatrolBehavior.h"
+#include "ScreenEdgeBehavior.h"
 #include <iostream>
-
-using namespace pathfinding;
-
-enum tileType 
-{
-	open,
-	closed
-};
 
 int main()
 {
@@ -41,22 +32,6 @@ int main()
 
 	SetTargetFPS(60);
 
-	//Map<tileType> map({ 1600, 800 }, { 16, 16 }, closed, MAROON);
-
-	////Walls
-	//map.createTile({ 0, 0 }, open, SKYBLUE);
-	//map.createTile({ 2, 0 }, open, SKYBLUE);
-	//map.createTile({ 2, 1 }, open, SKYBLUE);
-	//map.createTile({ 2, 2 }, open, SKYBLUE);
-	//map.createTile({ 1, 3 }, open, SKYBLUE);
-	//map.createTile({ 0, 2 }, open, SKYBLUE);
-
-	//Tile<tileType> tile1 = map.checkTile({ 100, 100 });
-	//Tile<tileType> tile2 = map.getTile({ 1, 3 });
-
-	//std::cout << tile1.data << ", ";
-	//std::cout << tile2.data << std::endl;
-
 	//Set up the player
 	Agent* player = new Agent();
 	player->setPosition({ screenWidth / 2.0f, screenHeight / 2.0f });
@@ -65,32 +40,50 @@ int main()
 	//Create and add keyboard behavior
 	KeyboardBehavior* keyboardBehavior = new KeyboardBehavior();
 	player->addBehavior(keyboardBehavior);
+	//Create ScreenEdgeBehavior
+	ScreenEdgeBehavior* screenEdgeBehavior = new ScreenEdgeBehavior();
+	//Add screenEdgeBehavior to the player
+	player->addBehavior(screenEdgeBehavior);
 
 	//Set up the enemies
 	Agent* enemy1 = new Agent();
 	enemy1->setPosition(Vector2{ 750.0f, 450.0f });
 	enemy1->setSpeed(250.0f);
 	enemy1->setColor(MAROON);
+	//Add screenEdgeBehavior to enemy1
+	enemy1->addBehavior(screenEdgeBehavior);
+
 	//Enemy 2
 	Agent* enemy2 = new Agent();
 	enemy2->setPosition(Vector2{ 650.0f, 350.0f });
 	enemy2->setSpeed(250.0f);
 	enemy2->setColor(MAROON);
+	//Add screenEdgeBehavior to enemy2
+	enemy2->addBehavior(screenEdgeBehavior);
+
 	//Enemy 3
 	Agent* enemy3 = new Agent();
 	enemy3->setPosition(Vector2{ 550.0f, 250.0f });
 	enemy3->setSpeed(250.0f);
 	enemy3->setColor(MAROON);
+	//Add screenEdgeBehavior to enemy3
+	enemy3->addBehavior(screenEdgeBehavior);
+
 	//Enemy 4
 	Agent* enemy4 = new Agent();
 	enemy4->setPosition(Vector2{ 450.0f, 150.0f });
 	enemy4->setSpeed(250.0f);
 	enemy4->setColor(MAROON);
+	//Add screenEdgeBehavior to enemy4
+	enemy4->addBehavior(screenEdgeBehavior);
+
 	//Enemy 5
 	Agent* enemy5 = new Agent();
 	enemy5->setPosition(Vector2{ 350.0f, 50.0f });
 	enemy5->setSpeed(250.0f);
 	enemy5->setColor(MAROON);
+	//Add screenEdgeBehavior to enemy5
+	enemy5->addBehavior(screenEdgeBehavior);
 
 	//Leaves
 	PatrolBehavior* patrolBehavior = new PatrolBehavior();
@@ -100,7 +93,7 @@ int main()
 	BehaviorDecision* pursuitDecision = new BehaviorDecision(pursuitBehavior);
 
 	//Branches
-	WithinRangeCondition* canSeeCondition = new WithinRangeCondition(player, 500.0f);
+	WithinRangeCondition* canSeeCondition = new WithinRangeCondition(player, 100.0f);
 	BoolDecision* canSeeDecision = new BoolDecision(pursuitDecision, patrolDecision, canSeeCondition);
 
 	//Enemy decision tree

@@ -42,11 +42,11 @@
     <ClCompile Include="PatrolBehavior.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ScreenEdgeBehavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Pathfinding.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Agent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -80,7 +80,7 @@
     <ClInclude Include="PatrolBehavior.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
+    <ClInclude Include="ScreenEdgeBehavior.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
